@@ -12,7 +12,7 @@ library(unhcrthemes)
 library(scales)
  
 # Source: Movements Report
-data <- read.csv("Movement_Report.csv") 
+data <- read.csv("https://raw.githubusercontent.com/IM-Peru/JNA_2025/refs/heads/main/Movement_Report.csv") 
 
 data$Mes <- gsub(" ", "", data$Mes)
 
@@ -547,28 +547,28 @@ ggplot(stock_proj_2 |>
 Considerando estos elementos, el equipo de Manejo de Información propone las proyecciones siguientes:
 
 ::: {.column width="45%"}
-<center>**`r round(sum(entries_mean_2 - exits_mean_2), 0)`** <br/> Saldo proyectado <br/> (`r format(round(sum(entries_mean_2 - exits_mean_2), 0)*365, big.mark = ",")` anual)</center>
+<center>**`r round(sum(entries_mean_1 - exits_mean_1), 0)`** <br/> Saldo proyectado <br/> (`r format(round(sum(entries_mean_1 - exits_mean_1), 0)*365, big.mark = ",")` anual)</center>
 :::
 
 ::: {.column width="45%"}
-<center>**`r format(round(stock_2025 + (sum(entries_mean_2 - exits_mean_2) * 365), 0), big.mark = ",")`** <br/> Stock 2026 <br/></center>
+<center>**`r format(round(stock_2025 + (sum(entries_mean_1 - exits_mean_1) * 365), 0), big.mark = ",")`** <br/> Stock 2026 <br/></center>
 :::
 
 
-Esta proyección utiliza el saldo promedio de ingresos y salidas observados entre `r fecha_2` a `r fecha_max` y presupone un stock constante en 2025 de 1.66M de personas venezolanas. Los flujos bajo esta proyección serían los siguientes:
+Esta proyección utiliza el saldo promedio de ingresos y salidas observados entre `r fecha_1` a `r fecha_max` y presupone un stock constante en 2025 de 1.66M de personas venezolanas. Los flujos bajo esta proyección serían los siguientes:
 
 ::: {.column width="49%"}
-<center>**`r format(round(sum(entries_mean_2), 0), big.mark = ",")`** <br> Entradas diarias <br> (`r format(round(sum(entries_mean_2), 0)*365, big.mark = ",")` anual)</center>
+<center>**`r format(round(sum(entries_mean_1), 0), big.mark = ",")`** <br> Entradas diarias <br> (`r format(round(sum(entries_mean_1), 0)*365, big.mark = ",")` anual)</center>
 :::
 
 ::: {.column width="49%"}
-<center>**`r format(round(sum(exits_mean_2), 0), big.mark = ",")`** <br> Salidas diarias <br> (`r format(round(sum(exits_mean_2), 0)*365, big.mark = ",")` anual)</center>
+<center>**`r format(round(sum(exits_mean_1), 0), big.mark = ",")`** <br> Salidas diarias <br> (`r format(round(sum(exits_mean_1), 0)*365, big.mark = ",")` anual)</center>
 :::
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
 
 # Utilizando Promedio de Escenario 2
-data_proyecciones <- data_2 |> 
+data_proyecciones <- data_1 |> 
   select(Punto, Direct, mean) |> 
   group_by(Punto, Direct) |> 
   summarize(mean = sum(mean, na.rm = TRUE)) |> 
@@ -586,7 +586,7 @@ data_proyecciones <- data_2 |>
   
 
 
-entries_mean_2 <- saldo("Entradas", mean) / 30
+entries_mean_1 <- saldo("Entradas", mean) / 30
 
 
 library(kableExtra)
@@ -607,7 +607,7 @@ stock_2022 <- 1493645
 stock_2023 <- 1542004
 stock_2024 <- 1662889
 stock_2025 <- 1662889
-stock_2026 <- round(stock_2025 + (sum(entries_mean_2 - exits_mean_2) * 365), 0)
+stock_2026 <- round(stock_2025 + (sum(entries_mean_1 - exits_mean_1) * 365), 0)
 
 Stock <- c(stock_2016, stock_2017, stock_2018, stock_2019, stock_2020, stock_2021, stock_2022, stock_2023, stock_2024, stock_2025, stock_2026)
 Stock_year <- c(2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026)
