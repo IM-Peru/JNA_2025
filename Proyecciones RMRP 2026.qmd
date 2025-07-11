@@ -586,7 +586,7 @@ data_proyecciones <- data_1 |>
   
 
 
-entries_mean_1 <- saldo("Entradas", mean) / 30
+#entries_mean_1 <- saldo("Entradas", mean) / 30
 
 
 library(kableExtra)
@@ -607,7 +607,7 @@ stock_2022 <- 1493645
 stock_2023 <- 1542004
 stock_2024 <- 1662889
 stock_2025 <- 1662889
-stock_2026 <- round(stock_2025 + (sum(entries_mean_1 - exits_mean_1) * 365), 0)
+stock_2026 <- round(stock_2025 + (sum(entries_mean_1 - exits_mean_1) * 365))
 
 Stock <- c(stock_2016, stock_2017, stock_2018, stock_2019, stock_2020, stock_2021, stock_2022, stock_2023, stock_2024, stock_2025, stock_2026)
 Stock_year <- c(2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026)
