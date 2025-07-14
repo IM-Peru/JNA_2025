@@ -117,6 +117,7 @@ Fecha de referencia: desde `r fecha_1` a `r fecha_max`
 saldo <- function(direction, var){
     result = data_1 |> 
     filter(Punto != "Total") |> 
+#    filter(Flujo == "Irregulares") |>  #Para filtrar por tipo de flujo
     filter(Direct == direction) |>
     select(Direct, {{ var }}) |> 
     group_by(Direct) |> 
