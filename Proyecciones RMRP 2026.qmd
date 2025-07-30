@@ -44,6 +44,7 @@ data_1 <- data |>
   filter(!grepl('DTM', Tipo)) |>
   pivot_wider(names_from = Calc, values_from = Tot) |>
   mutate(Flujo = if_else(str_detect(Tipo, "Regulares"), "Regulares", "Irregulares")) |>
+  #filter(Flujo == "Irregulares") |>  # Filtro para solo irregulares
   mutate(Punto = if_else(str_detect(Tipo, "Tumbes"), "Tumbes", 
                          if_else(str_detect(Tipo, "Tacna"), "Tacna", 
                                  if_else(str_detect(Tipo, "Puno"), "Puno", 
@@ -83,6 +84,7 @@ data_2 <- data |>
   filter(!grepl('DTM', Tipo)) |>
   pivot_wider(names_from = Calc, values_from = Tot) |>
   mutate(Flujo = if_else(str_detect(Tipo, "Regulares"), "Regulares", "Irregulares")) |>
+  #filter(Flujo == "Irregulares") |>  # Filtro para solo irregulares
   mutate(Punto = if_else(str_detect(Tipo, "Tumbes"), "Tumbes", 
                          if_else(str_detect(Tipo, "Tacna"), "Tacna", 
                                  if_else(str_detect(Tipo, "Puno"), "Puno", 
@@ -117,7 +119,7 @@ Fecha de referencia: desde `r fecha_1` a `r fecha_max`
 saldo <- function(direction, var){
     result = data_1 |> 
     filter(Punto != "Total") |> 
-#    filter(Flujo == "Irregulares") |>  #Para filtrar por tipo de flujo
+    # filter(Flujo == "Irregulares") |>
     filter(Direct == direction) |>
     select(Direct, {{ var }}) |> 
     group_by(Direct) |> 
